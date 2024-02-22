@@ -4,93 +4,81 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User extends Object{
+	
 	private String firstName;
 	private String lastName;
-	private long phoneNo;
-	private String DateOfBirth;
-	private String Address;
+	private long phoneNum;
+	private String dateOfBirth;
+	private String communicationAddr;
+	
 	private int userId;
-	private String passWord;
+	private String password;
 	
-	private List<Bankaccount> Bankacctlist = new ArrayList<Bankaccount>();
+	private List<BankAccount> baList = new ArrayList<BankAccount>();
 	
-	public List<Bankaccount> getBankacctlist() {
-		return Bankacctlist;
+//	private int paymentsAcctId;
+	//private Wallet w;
+	
+	public List<BankAccount> getBaList() {
+		return baList;
 	}
-
-	public void setBankacctlist(List<Bankaccount> bankacctlist) {
-		Bankacctlist = bankacctlist;
+	public void setBaList(List<BankAccount> baList) {
+		this.baList = baList;
 	}
-	
 	public String getFirstName() {
 		return firstName;
 	}
-
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-
 	public String getLastName() {
 		return lastName;
 	}
-
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
-	public long getPhoneNo() {
-		return phoneNo;
+	public long getPhoneNum() {
+		return phoneNum;
 	}
-
-	public void setPhoneNo(long phoneNo) {
-		this.phoneNo = phoneNo;
+	public void setPhoneNum(long phoneNum) {
+		this.phoneNum = phoneNum;
 	}
-
 	public String getDateOfBirth() {
-		return DateOfBirth;
+		return dateOfBirth;
 	}
-
 	public void setDateOfBirth(String dateOfBirth) {
-		DateOfBirth = dateOfBirth;
+		this.dateOfBirth = dateOfBirth;
 	}
-
-	public String getAddress() {
-		return Address;
+	public String getCommunicationAddr() {
+		return communicationAddr;
 	}
-
-	public void setAddress(String address) {
-		Address = address;
+	public void setCommunicationAddr(String communicationAddr) {
+		this.communicationAddr = communicationAddr;
 	}
-
 	public int getUserId() {
 		return userId;
 	}
-
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-
-	public String getPassWord() {
-		return passWord;
+	public String getPassword() {
+		return password;
 	}
-
-	public void setPassWord(String passWord) {
-		this.passWord = passWord;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	//Account[]
-	//Bank Acccount[]
 	
-	//Payment Account
+//	Account[]
+//	BankAccount[]
 	@Override
 	public String toString() {
-		return this.userId + ":" + this.firstName + ":" + this.lastName+":"+ this.phoneNo+":"+this.DateOfBirth+":"+this.Address+":"+this.passWord;
-		
-	}
-	public String UserToFile() {
-		return this.userId + "," + this.firstName + "," + this.lastName+","+ this.phoneNo+","+this.DateOfBirth+","+this.Address+","+this.passWord+"\n";
-		
+		return this.userId+":"+ this.firstName +":"+ this.lastName + ":"+this.phoneNum+":"+this.dateOfBirth+":"+this.communicationAddr;
 	}
 	
+	public String userToFileRecord() {
+		return this.userId+","+ this.firstName +","+ this.lastName + ","+this.phoneNum+","+this.dateOfBirth+","+this.communicationAddr+"\n";
+	}
 
+	
 	
 }
