@@ -101,7 +101,7 @@ public class Runpaymentapp {
 			
 		}else if(Optstr.equalsIgnoreCase("8")) {
 			if(CurrUserId != -1) {
-				delBankAccount();
+				deleteUserAccount();
 
 			if(CurrUserId != -1) {
 				PrintCurrUserBankaccountList();
@@ -149,7 +149,7 @@ public class Runpaymentapp {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-//			
+		
 		}
 		public static boolean loginUser() {
 			Scanner opt = new Scanner(System.in); 
@@ -185,7 +185,6 @@ public class Runpaymentapp {
 			System.out.println("CU: CURRENT");
 			System.out.println("LN: LOAN");
 			System.out.println("SL: SALARY");
-//			String Acctype = opt.next();
 			for(Acctype type : Acctype.values()) {
 				System.out.println(" "+ type);
 			}									
@@ -258,23 +257,40 @@ public class Runpaymentapp {
 			}
 		}
 
-		public static void delBankAccount() {
-		    Scanner opt = new Scanner(System.in);
+		 public static void deleteUserAccount() {
+		     
+		        int userIdToDelete = CurrUserId;
 
-		    System.out.println("Enter Bank Account Number: ");
-		    String acNum = opt.next();
+	
+		        removeUserBankAccounts(userIdToDelete);
 
-		    boolean accountFound = false;
-		    for (Bankaccount acct : Bankacctlist) {
-		        if (acct.getBankacctnumber().equals(acNum)) {
-		           Bankacctlist.remove(acct);
-		            accountFound = true;
-		            System.out.println("Bank account deleted successfully.");
-		             break;
+		      
+		        boolean userFound = false;
+		        for (int i = 0; i < userlist.size(); i++) {
+		            User user = userlist.get(i);
+		            if (user.getUserId() == userIdToDelete) {
+		                userlist.remove(i);
+		                CurrUserId = -1; 
+		                userFound = true;
+		                System.out.println("User account deleted successfully.");
+		                break;
+		            }
+		        }
+		        if (!userFound) {
+		            System.out.println("User account not found.");
 		        }
 		    }
-		    if (!accountFound) {
-		        System.out.println("Account not found.");
+
+		    public static void removeUserBankAccounts(int userId) {
+		        
+		        List<Bankaccount> accountsToRemove = new ArrayList<>();
+		        for (Bankaccount account : Bankacctlist) {
+		            if (account.getUserId() == userId) {
+		                accountsToRemove.add(account);
+		            }
+		        }
+		        Bankacctlist.removeAll(accountsToRemove);
 		    }
+
+		  
 		}
-}
