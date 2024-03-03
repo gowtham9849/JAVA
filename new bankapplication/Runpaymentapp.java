@@ -1,6 +1,6 @@
 
 import java.util.ArrayList;
-
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -9,6 +9,8 @@ import java.util.Set;
 
 
 public class Runpaymentapp {
+	public static final Map<Integer, Wallet> Walletlist = null;
+	public static final Map<Integer, Transaction> Txnlist = null;
 	static int x = 0;
 	public static List<User> userlist = new ArrayList<User>();
 	public static List<Bankaccount> Bankacctlist = new ArrayList<Bankaccount>();
@@ -28,11 +30,15 @@ public class Runpaymentapp {
 			System.out.println("4.List Of Users");
 			System.out.println("5.Current User");
 			System.out.println("6. List of All User Bank Account");
-			System.out.println("7.Add Money To Wallet");
-			System.out.println("8. Delete Bank Account");
-			System.out.println("-1.Quit / Log Out");
+			System.out.println("7.Add Money To Wallet(self)");
+			System.out.println("8.Check Balance in Wallet");
+			System.out.println("9.Send Money To Other User(DEPOSIT)");
+			System.out.println("10.User Can Withdraw The Money(WITHDRAW)");
+			System.out.println("11.Mini Statement of transaction");
+			System.out.println("12.Delete Bank Account");
+			System.out.println("13.To Log Out The User");
+			System.out.println("-1.Quit / Exit From Command");
 			System.out.println("Choose an Option: ");
-			
 			String Optstr = opt.next();	
 			
 		try {
@@ -59,58 +65,95 @@ public class Runpaymentapp {
 			
 			Useroperations ops = new Useroperations();
 			
-		if(Optstr.equalsIgnoreCase("1")){
-			
-			registerUser();
-			
-		}
-		else if(Optstr.equalsIgnoreCase("2")) {
-			
-			loginUser();
-			
-			
-		}
-		else if(Optstr.equalsIgnoreCase("3")) {
-			
-			if(ValidateCurrUser()) {
+			if(Optstr.equalsIgnoreCase("1")){
 				
-			addBankAccount();
-			
+				registerUser();
+				
 			}
-		}else if(Optstr.equalsIgnoreCase("4")) {
-			ops.printUserlist(userlist);
-			
-			
-		}else if(Optstr.equalsIgnoreCase("5")){
-			
-			if(CurrUserId != -1) {
-			ops.Printcurruserdetails(CurrUserId);
+			else if(Optstr.equalsIgnoreCase("2")) {
+				
+				
+				if(CurrUserId != -1) {
+				
+					System.out.println("please log out the current User ");
+				
+				}else {
+					loginUser();
+				}
+				
+				
 			}
-			
-		}else if(Optstr.equalsIgnoreCase("6")){
-			if(CurrUserId != -1) {
-				PrintCurrUserBankaccountList();
-			}
-			
-		}else if(Optstr.equalsIgnoreCase("7")) {
-			if(CurrUserId != -1) {
-				addWallet(CurrUserId);
-			}else {
-			System.out.println("User Must Log In to Add Money to wallet");
-			}
-			
-		}else if(Optstr.equalsIgnoreCase("8")) {
-			if(CurrUserId != -1) {
-				deleteUserAccount();
+			else if(Optstr.equalsIgnoreCase("3")) {
+				
+				if(ValidateCurrUser()) {
+					
+				addBankAccount();
+				
+				}
+			}else if(Optstr.equalsIgnoreCase("4")) {
+				
+				ops.printUserlist(userlist);
+				
+				
+			}else if(Optstr.equalsIgnoreCase("5")){
+				
+				if(CurrUserId != -1) {
+				ops.Printcurruserdetails(CurrUserId);
+				}else{
+					System.out.println("No User Has Logged In");
+				}
+				
+			}else if(Optstr.equalsIgnoreCase("6")){
 
-			if(CurrUserId != -1) {
-				PrintCurrUserBankaccountList();
-			}
-			
-			
-		}else if(Optstr.equalsIgnoreCase("-1")) {
-			System.out.println("You Have Exit");
-			break;
+				if(CurrUserId != -1) {
+					PrintCurrUserBankaccountList();
+				}else {
+					System.out.println("Please Login to show bank accounts");
+				}
+				
+				
+			}else if(Optstr.equalsIgnoreCase("7")) {
+				if(CurrUserId != -1) {
+					
+//					addWallet();
+					
+				}else {
+				System.out.println("User Must Log In to Add Money to wallet");
+				}
+			}else if(Optstr.equalsIgnoreCase("8")) {
+				if(CurrUserId != -1) {
+					System.out.println(ops.checkWalletBalance());
+				}else {
+					System.out.println("Please Log in to Check Balance In Wallet");
+				}
+			}else if(Optstr.equalsIgnoreCase("9")) {
+				if(CurrUserId != -1) {
+					ops.Dotransaction();
+				}
+			}else if(Optstr.equalsIgnoreCase("10")) {
+				if(CurrUserId != -1) {
+					
+				}
+			}else if(Optstr.equalsIgnoreCase("11")) {
+				if(CurrUserId != -1) {
+					
+				}
+			}else if(Optstr.equalsIgnoreCase("12")) {
+				if(CurrUserId != -1) {
+					 Scanner ot = new Scanner(System.in);
+					  Bankaccount ba = new Bankaccount();
+					    System.out.println("Enter Bank Account Number: ");
+					    long accnum = opt.nextLong();
+					DelBankAcc(CurrUserId,accnum, userlist);
+				}else {
+					System.out.println("please login to delete the bankaccount");
+				}
+			}else if(Optstr.equalsIgnoreCase("13")) {
+				if(CurrUserId != -1) {
+					logout();
+			}else if(Optstr.equalsIgnoreCase("-1")) {
+				System.out.println("You Have Exit");
+				break;
 			
 		}
 			  	
@@ -257,40 +300,27 @@ public class Runpaymentapp {
 			}
 		}
 
-		 public static void deleteUserAccount() {
-		     
-		        int userIdToDelete = CurrUserId;
-
-	
-		        removeUserBankAccounts(userIdToDelete);
-
-		      
-		        boolean userFound = false;
-		        for (int i = 0; i < userlist.size(); i++) {
-		            User user = userlist.get(i);
-		            if (user.getUserId() == userIdToDelete) {
-		                userlist.remove(i);
-		                CurrUserId = -1; 
-		                userFound = true;
-		                System.out.println("User account deleted successfully.");
-		                break;
+		public static void DelBankAcc(int UserId, long accnum, List<User> userlist) {
+		    for(User u : userlist) {
+		        if(u.getUserId() == UserId) {
+		            List<Bankaccount> Bankacctlist = u.getBankacctlist();
+		            Iterator<Bankaccount> iterator = Bankacctlist.iterator();
+		            while(iterator.hasNext()) {
+		                Bankaccount acct = iterator.next();
+		                if(acct.getBankacctnumber()== accnum) {
+		                    iterator.remove();
+		                    System.out.println("Bankaccount Deleted Successfully");
+		                    return;
+		                }
 		            }
 		        }
-		        if (!userFound) {
-		            System.out.println("User account not found.");
-		        }
 		    }
-
-		    public static void removeUserBankAccounts(int userId) {
-		        
-		        List<Bankaccount> accountsToRemove = new ArrayList<>();
-		        for (Bankaccount account : Bankacctlist) {
-		            if (account.getUserId() == userId) {
-		                accountsToRemove.add(account);
-		            }
-		        }
-		        Bankacctlist.removeAll(accountsToRemove);
-		    }
-
-		  
+		    System.out.println("Bank Account has not matched");
 		}
+		
+		
+		public static void logout() {
+			CurrUserId = -1;
+			System.out.println("User has Log out");
+		}
+}

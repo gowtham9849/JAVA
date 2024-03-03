@@ -1,5 +1,3 @@
-
-
 public class Bankaccount {
 	private String Bankacctnumber;
 	private String BankacctBankName;
@@ -14,6 +12,7 @@ public class Bankaccount {
 	public void setBankacctnumber(String bankacctnumber) {
 		Bankacctnumber = bankacctnumber;
 	}
+
 	public String getBankacctBankName() {
 		return BankacctBankName;
 	}

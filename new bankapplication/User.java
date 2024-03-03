@@ -77,10 +77,7 @@ public class User extends Object{
 	public void setPassWord(String passWord) {
 		this.passWord = passWord;
 	}
-	//Account[]
-	//Bank Acccount[]
 	
-	//Payment Account
 	@Override
 	public String toString() {
 		return this.userId + ":" + this.firstName + ":" + this.lastName+":"+ this.phoneNo+":"+this.DateOfBirth+":"+this.Address+":"+this.passWord;
