@@ -1,15 +1,17 @@
+
+
 public class Bankaccount {
-	private String Bankacctnumber;
+	private long Bankacctnumber;
 	private String BankacctBankName;
 	private Acctype Acctype;
 	private String BankAcctIFSC;
 	private String BankAcctPin;
 	private int userId;
 	
-	public String getBankacctnumber() {
+	public long getBankacctnumber() {
 		return Bankacctnumber;
 	}
-	public void setBankacctnumber(String bankacctnumber) {
+	public void setBankacctnumber(long bankacctnumber) {
 		Bankacctnumber = bankacctnumber;
 	}
 

@@ -1,64 +1,119 @@
-import javax.print.attribute.standard.Destination;
-import javax.xml.transform.Source;
+
+
+
+import java.time.LocalDate;
 
 public class Transaction {
-	private int TxnId;
-	private String Txndate;
-	private double Txnamount;
-	private Source Txnsrc;
-	private long Srcnumber;
-	private Destination TxnDest;
-	private long Destnumber;
-//	private Wallet wal;
+	private String TxnId;
+	private LocalDate TransactionDate;
+	private double txnamount;
+	private Txn Transactiontype;
+	
 
-//	public Wallet getWal() {
-//		return wal;
-//	}
-//
-//	public void setWal(Wallet wal) {
-//		this.wal = wal;
-//	}
-	public int getTxnId() {
+	
+
+
+	private Transactiontype Txnsrc;
+	private int UserId;
+	private Transactiontype TxnDest;
+	Wallet sourceWallet;
+	Wallet destinationWallet;
+	
+	
+	public String getTxnId() {
 		return TxnId;
 	}
-	public void setTxnId(int txnId) {
-		TxnId = txnId;
+
+
+	public void setTxnId(String txnId) {
+		TxnId =txnId;
 	}
-	public String getTxndate() {
-		return Txndate;
+
+
+	public LocalDate getTransactionDate() {
+		return TransactionDate;
 	}
-	public void setTxndate(String txndate) {
-		Txndate = txndate;
+
+
+	public void setTransactionDate(LocalDate transactionDate) {
+		TransactionDate = transactionDate;
 	}
+
+
 	public double getTxnamount() {
-		return Txnamount;
+		return txnamount;
 	}
+
+
 	public void setTxnamount(double txnamount) {
-		Txnamount = txnamount;
+		this.txnamount = txnamount;
 	}
-	public Source getTxnsrc() {
+
+
+	public Transactiontype getTxnsrc() {
 		return Txnsrc;
 	}
-	public void setTxnsrc(Source txnsrc) {
+
+
+	public void setTxnsrc(Transactiontype txnsrc) {
 		Txnsrc = txnsrc;
 	}
-	public long getSrcnumber() {
-		return Srcnumber;
+
+
+	public int getUserId() {
+		return UserId;
 	}
-	public void setSrcnumber(long srcnumber) {
-		Srcnumber = srcnumber;
+
+
+	public void setUserId(int userId) {
+		UserId = userId;
 	}
-	public Destination getTxnDest() {
+
+
+	public Transactiontype getTxnDest() {
 		return TxnDest;
 	}
-	public void setTxnDest(Destination txnDest) {
+
+
+	public void setTxnDest(Transactiontype txnDest) {
 		TxnDest = txnDest;
 	}
-	public long getDestnumber() {
-		return Destnumber;
+
+
+	public Wallet getSourceWallet() {
+		return sourceWallet;
 	}
-	public void setDestnumber(long destnumber) {
-		Destnumber = destnumber;
+
+
+	public void setSourceWallet(Wallet sourceWallet) {
+		this.sourceWallet = sourceWallet;
+	}
+
+
+	public Wallet getDestinationWallet() {
+		return destinationWallet;
+	}
+
+
+	public void setDestinationWallet(Wallet destinationWallet) {
+		this.destinationWallet = destinationWallet;
+	}
+	
+	public Txn getTransactiontype() {
+		return Transactiontype;
+	}
+
+
+	public void setTransactiontype(Txn transactiontype) {
+		Transactiontype = transactiontype;
+	}
+
+	@Override
+	public String toString() {
+		return "--->" +": Transaction ID " + TxnId + "Transaction date : " + TransactionDate 
+				+ "Transaction Amount: "+txnamount + "Transaction Source Type" + Txnsrc 
+				+" Amount sent to UserId "+ UserId + "Transaction Destination Type"
+				+ TxnDest ;
 	}
 	
 }

@@ -1,17 +1,17 @@
 
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 
-
 public class Useroperations {
 	List<User>users = Runpaymentapp.userlist;
 	List<Bankaccount> Bank = Runpaymentapp.Bankacctlist;
 	Map<Integer , Wallet> Walletlist = Runpaymentapp.Walletlist; 
-	Map<Integer , Transaction > Txnlist = Runpaymentapp.Txnlist;
+//	Map<Integer , Transaction > Txnlist = Runpaymentapp.Txnlist;
 	
 //	List<User> users = null;
 //	List<Bankaccount> Bankacctlist = null;
@@ -102,84 +102,18 @@ public class Useroperations {
 		System.out.println("Your Current Balance in Your Wallet : ");
 		return Walletlist.get(Runpaymentapp.CurrUserId ).getBalance();
 	}
-	public void Dotransaction() {
-		Scanner ty = new Scanner(System.in);
-		Transaction txn = new Transaction();
-		Wallet w = new Wallet();
-//		User u = new User();
-		System.out.println("Select The Option to Send Money From Which Account: ");
-		for(Source s : Source.values()) {
-			System.out.println(" "+ s ); 			//for Txn Src Enum
+	public boolean Transaction(Wallet Sender, Wallet receiver, Txn tType, double amount) {
+		if(Sender.getBalance()>amount) {
+			receiver.setBalance(receiver.getBalance()+ amount);
+			Sender.setBalance(Sender.getBalance()-amount);
+			return true;	
 		}
-		try {
-		String Src = ty.next();
-		Source Srctype = Source.valueOf(Src.toUpperCase());
-		txn.setTxnsrc(Srctype);
-		}catch(IllegalArgumentException e) {
-			e.printStackTrace();
-			System.out.println("Please Select the Correct Option");
-		}
-		if(txn.getTxnsrc()==Source.CASH){
+		return false;
 		
-		      System.out.println("Enter the Source Amount : ");
-		       txn.setTxnamount(ty.nextDouble());
-		        double amount = txn.getTxnamount();
-		        System.out.println("Enter the Destination UserID To Send the money : ");
-		        int Destuid = ty.nextInt();
-		        for(User user : users) {
-		            if(user.getUserId() == Destuid) {
-		            
-//		               Walletlist.put(Destuid, w.setBalance(amount + w.getBalance()));
-		            	
-		            	
-		            	
-		                System.out.println("Amount Sent to "+ Destuid +" Successfully");
-		                break;
-		            } else {
-		                System.out.println("User Id Entered is Not Found");
-		            }
-		        }
-					
-		}else if(txn.getTxnsrc()==Source.BANK){
-			
-			
-	        System.out.println("Enter the Source Amount : ");
-	        txn.setTxnamount(ty.nextDouble());
-	        double amount = txn.getTxnamount();
-	        System.out.println("Enter the Bank Account Number : ");
-	        long DestAcctNo = ty.nextLong();
-	        for(Bankaccount ba : Bank) {
-	            if(ba.getBankacctnumber() == DestAcctNo) {
-	            	
-	            	
-	            	
-	            	
-	                w.setBalance(amount + w.getBalance());
-	                System.out.println("Amount Sent to this Account Number "+ DestAcctNo +" Successfully");
-	            } else {
-	                System.out.println("Account Number Entered is Not Found");
-	            }
-	        }
-
-		}else if (txn.getTxnsrc()==Source.WALLET)  {
-			System.out.println("Enter the Source Amount : ");
-			txn.setTxnamount(ty.nextDouble());
-			double amount = txn.getTxnamount();
-			if(w.getBalance()>= amount) {
-				System.out.println("Enter the UserId : ");
-				int Destuid1 = ty.nextInt();
-				for(User user : users) {
-					if(user.getUserId() == Destuid1) {
-						
-						
-						
-						w.setBalance(amount+ w.getBalance());
-						System.out.println("Amount Sent to "+ Destuid1 +" Successfull");
-					}
-				}
-			}else {
-				System.out.println("User Id Entered is Not Found");
-			}
-		}
+		
 	}
+	
+	
 }
+
+//}

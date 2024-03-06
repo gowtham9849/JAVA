@@ -1,24 +1,32 @@
-
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
-
 
 
 public class Runpaymentapp {
-	public static final Map<Integer, Wallet> Walletlist = null;
-	public static final Map<Integer, Transaction> Txnlist = null;
 	static int x = 0;
 	public static List<User> userlist = new ArrayList<User>();
 	public static List<Bankaccount> Bankacctlist = new ArrayList<Bankaccount>();
+	public static Map<Integer, Wallet> Walletlist = new HashMap<Integer , Wallet>();
+//	public static Map<Integer,Transaction> Txnlist = new HashMap<Integer,Transaction>();
 	public static int CurrUserId =-1;
-	private static Bankaccount ba;
+
 	
 	
 	public static void main(String[] args) {
+//		Fileops fileOps = new Fileops();
+//		 try {
+//			List<User> userData = fileOps.fileToUser();
+//			for(User u : userData) {
+//				System.out.println(u.getUserId()+" "+u.getFirstName()+" "+u.getLastName()+" "+u.getPhoneNo()+" "+u.getDateOfBirth()+" "+u.getAddress());
+//			}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//	}
 		int SelectedOption = 0;
 		Scanner opt = new Scanner(System.in); 
 		
@@ -39,6 +47,7 @@ public class Runpaymentapp {
 			System.out.println("13.To Log Out The User");
 			System.out.println("-1.Quit / Exit From Command");
 			System.out.println("Choose an Option: ");
+			
 			String Optstr = opt.next();	
 			
 		try {
@@ -65,106 +74,100 @@ public class Runpaymentapp {
 			
 			Useroperations ops = new Useroperations();
 			
-			if(Optstr.equalsIgnoreCase("1")){
-				
-				registerUser();
-				
-			}
-			else if(Optstr.equalsIgnoreCase("2")) {
-				
-				
-				if(CurrUserId != -1) {
-				
-					System.out.println("please log out the current User ");
-				
-				}else {
-					loginUser();
-				}
-				
-				
-			}
-			else if(Optstr.equalsIgnoreCase("3")) {
-				
-				if(ValidateCurrUser()) {
-					
-				addBankAccount();
-				
-				}
-			}else if(Optstr.equalsIgnoreCase("4")) {
-				
-				ops.printUserlist(userlist);
-				
-				
-			}else if(Optstr.equalsIgnoreCase("5")){
-				
-				if(CurrUserId != -1) {
-				ops.Printcurruserdetails(CurrUserId);
-				}else{
-					System.out.println("No User Has Logged In");
-				}
-				
-			}else if(Optstr.equalsIgnoreCase("6")){
-
-				if(CurrUserId != -1) {
-					PrintCurrUserBankaccountList();
-				}else {
-					System.out.println("Please Login to show bank accounts");
-				}
-				
-				
-			}else if(Optstr.equalsIgnoreCase("7")) {
-				if(CurrUserId != -1) {
-					
-//					addWallet();
-					
-				}else {
-				System.out.println("User Must Log In to Add Money to wallet");
-				}
-			}else if(Optstr.equalsIgnoreCase("8")) {
-				if(CurrUserId != -1) {
-					System.out.println(ops.checkWalletBalance());
-				}else {
-					System.out.println("Please Log in to Check Balance In Wallet");
-				}
-			}else if(Optstr.equalsIgnoreCase("9")) {
-				if(CurrUserId != -1) {
-					ops.Dotransaction();
-				}
-			}else if(Optstr.equalsIgnoreCase("10")) {
-				if(CurrUserId != -1) {
-					
-				}
-			}else if(Optstr.equalsIgnoreCase("11")) {
-				if(CurrUserId != -1) {
-					
-				}
-			}else if(Optstr.equalsIgnoreCase("12")) {
-				if(CurrUserId != -1) {
-					 Scanner ot = new Scanner(System.in);
-					  Bankaccount ba = new Bankaccount();
-					    System.out.println("Enter Bank Account Number: ");
-					    long accnum = opt.nextLong();
-					DelBankAcc(CurrUserId,accnum, userlist);
-				}else {
-					System.out.println("please login to delete the bankaccount");
-				}
-			}else if(Optstr.equalsIgnoreCase("13")) {
-				if(CurrUserId != -1) {
-					logout();
-			}else if(Optstr.equalsIgnoreCase("-1")) {
-				System.out.println("You Have Exit");
-				break;
+		if(Optstr.equalsIgnoreCase("1")){
+			
+			registerUser();
 			
 		}
-			  	
-		}	
-		
+		else if(Optstr.equalsIgnoreCase("2")) {
+			
+			
+			if(CurrUserId != -1) {
+			
+				System.out.println("please log out the current User ");
+			
+			}else {
+				loginUser();
+			}
+			
+			
 		}
-		
+		else if(Optstr.equalsIgnoreCase("3")) {
+			
+			if(ValidateCurrUser()) {
+				
+			addBankAccount();
+			
+			}
+		}else if(Optstr.equalsIgnoreCase("4")) {
+			
+			ops.printUserlist(userlist);
+			
+			
+		}else if(Optstr.equalsIgnoreCase("5")){
+			
+			if(CurrUserId != -1) {
+			ops.Printcurruserdetails(CurrUserId);
+			}else{
+				System.out.println("No User Has Logged In");
+			}
+			
+		}else if(Optstr.equalsIgnoreCase("6")){
+
+			if(CurrUserId != -1) {
+				PrintCurrUserBankaccountList();
+			}else {
+				System.out.println("Please Login to show bank accounts");
+			}
+			
+			
+		}else if(Optstr.equalsIgnoreCase("7")) {
+			if(CurrUserId != -1) {
+				
+				addWallet();
+				
+			}else {
+			System.out.println("User Must Log In to Add Money to wallet");
+			}
+		}else if(Optstr.equalsIgnoreCase("8")) {
+			if(CurrUserId != -1) {
+				System.out.println(ops.checkWalletBalance());
+			}else {
+				System.out.println("Please Log in to Check Balance In Wallet");
+			}
+		}else if(Optstr.equalsIgnoreCase("9")) {
+			if(CurrUserId != -1) {
+				Dotransaction();
+			}
+		}else if(Optstr.equalsIgnoreCase("10")) {
+			if(CurrUserId != -1) {
+				
+			}
+		}else if(Optstr.equalsIgnoreCase("11")) {
+			if(CurrUserId != -1) {
+				
+			}
+		}else if(Optstr.equalsIgnoreCase("12")) {
+			if(CurrUserId != -1) {
+				 Scanner ot = new Scanner(System.in);
+				  Bankaccount ba = new Bankaccount();
+				    System.out.println("Enter Bank Account Number: ");
+				    long accnum = opt.nextLong();
+				DelBankAcc(CurrUserId,accnum, userlist);
+			}else {
+				System.out.println("please login to delete the bankaccount");
+			}
+		}else if(Optstr.equalsIgnoreCase("13")) {
+			if(CurrUserId != -1) {
+				logout();
+		}else if(Optstr.equalsIgnoreCase("-1")) {
+			System.out.println("You Have Exit");
+			break;
+			
+				}
+			}
+		}
 	}
-		
-		
-	
 		public static void registerUser(){
 			Scanner opt = new Scanner(System.in); 
 			
@@ -183,7 +186,7 @@ public class Runpaymentapp {
 			System.out.println("password : ");
 			String passWord = opt.next();
 			
-			User u;
+			User u = null;
 			
 			try {
 				u = ops.douserregistration(fname, lname, phoneNo, dob, passWord, address);
@@ -192,7 +195,11 @@ public class Runpaymentapp {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			Wallet w = new Wallet();
+			int UserId = u.getUserId();
+			Walletlist.put(UserId, w);
 		
+
 		}
 		public static boolean loginUser() {
 			Scanner opt = new Scanner(System.in); 
@@ -214,23 +221,26 @@ public class Runpaymentapp {
 			}
 		}
 		public static void addBankAccount() {
+			
+			Bankaccount ba = new Bankaccount();
+			
 			Scanner opt = new Scanner(System.in);
 			System.out.println("Enter Bank Account Number: ");
-			String Bankacctnumber = opt.next(); 
+			long Bankacctnumber = opt.nextLong();
 			System.out.println("Enter The Bank Name : ");
 			String BankacctBankName = opt.next();
 			System.out.println("Enter the Bank Account Pin : ");
 			String BankAcctPin = opt.next();
 			System.out.println("Enter the Bank IFSC Code:");
 			String BankAcctIFSC = opt.next();
-			System.out.println("Please Select the Account Type : ");
+			System.out.println("Please Select the Following Account Type : ");
 			System.out.println("SA: SAVINGS");
 			System.out.println("CU: CURRENT");
 			System.out.println("LN: LOAN");
 			System.out.println("SL: SALARY");
 			for(Acctype type : Acctype.values()) {
 				System.out.println(" "+ type);
-			}									
+			}									//Account Type Enum Selection.
 			try {
 			String Acty = opt.next();
 			Acctype Accty = Acctype.valueOf(Acty);
@@ -242,13 +252,11 @@ public class Runpaymentapp {
 				}
 			}
 			
-
-			Bankaccount ba = new Bankaccount();
+			
 			ba.setBankacctnumber(Bankacctnumber);
 			ba.setBankacctBankName(BankacctBankName);
 			ba.setBankAcctPin(BankAcctPin);
 			ba.setBankAcctIFSC(BankAcctIFSC);
-			ba.setAcctype(Acctype.SALARY);
 			ba.setUserId(CurrUserId);
 			
 			
@@ -282,23 +290,28 @@ public class Runpaymentapp {
 			}
 			
 		}
-		public static void addWallet(int UserId) {
+		public static void addWallet() {
+
 			Scanner sc = new  Scanner(System.in);
 			System.out.println("Enter Amount to Add Wallet : ");
 			double amount = sc.nextDouble();
 			Wallet w = new Wallet();
+
 			w.setWalletlimit(10000);
-			if(amount <= 1000) {				
-				Wallet.setBalance(Wallet.getBalance()+amount);
-				if(Wallet.getBalance()> w.getWalletlimit()) {
-					System.out.println("Wallet amount Exceeded. Wallet Limit is 10000.");
-					Wallet.setBalance(Wallet.getBalance()-amount);
-				}
-				System.out.println("Your Current Balance In wallet : "+Wallet.getBalance());
-			}else {
-				System.out.println("Maximum Amount Deposit Limit is 1000");
+						if(amount <= 10000.00) {
+							Useroperations ops = new Useroperations();
+							ops.addMoneytoWallet(amount);
+						if(Wallet.getBalance()> w.getWalletlimit()) {
+							System.out.println("Wallet amount Exceeded. Wallet Limit is 10000.");
+							Wallet.setBalance(Wallet.getBalance()-amount);
+						}else {
+						System.out.println("Maximum Amount Deposit Limit is 10000");
+					
+						}
 			}
-		}
+}
+
+			
 
 		public static void DelBankAcc(int UserId, long accnum, List<User> userlist) {
 		    for(User u : userlist) {
@@ -322,5 +335,115 @@ public class Runpaymentapp {
 		public static void logout() {
 			CurrUserId = -1;
 			System.out.println("User has Log out");
+		}
+		public static void Dotransaction() {
+			Useroperations ops = new Useroperations();
+			Scanner ty = new Scanner(System.in);
+			Transaction txn = new Transaction();
+			LocalDate date = LocalDate.now();
+			Wallet w = new Wallet();
+			int i=1;
+			for (Txn tx : Txn.values()) {
+				System.out.println(i+ " " + tx);
+				i++;
+			}
+			System.out.println("Select The Option To Send or Withdraw : ");
+			int option = ty.nextInt();
+			if(option == 1) {
+				 txn.setTransactiontype(Txn.Deposit);
+				 System.out.println("Select The Option to Send Money From Which Account: ");
+			for(Transactiontype s : Transactiontype.values()) {
+				System.out.println(" "+ s ); 			//for Txn Src Enum
+				
+			}
+			try {
+			String Src = ty.next();
+			Transactiontype Srctype = Transactiontype.valueOf(Src.toUpperCase());
+			txn.setTxnsrc(Srctype);
+			}catch(IllegalArgumentException e) {
+				e.printStackTrace();
+				System.out.println("Please Select the Correct Option");
+			}
+			if(txn.getTxnsrc()==Transactiontype.CASH){
+			
+//			      System.out.println("Enter the Source Amount : ");
+//			       txn.setAmount(ty.nextDouble());;
+//			        double amount = txn.getAmount();
+//			        System.out.println("Enter the Destination UserID To Send the money : ");
+//			        int Destuid = ty.nextInt();
+//			        for(User user : users) {
+//			            if(user.getUserId() == Destuid) {
+//			            	
+//			            	
+//			            	
+////			            	Walletlist.get(users.get(Destuid)).setBalance(Walletlist.get(users.get(Destuid)).getBalance()+amount);
+////			            	
+////			                System.out.println("Amount Sent to "+ Destuid +" Successfully");
+////			                System.out.println(Walletlist.get(users.get(Destuid)).getBalance());
+//			            	user.getWallet().setBalance(user.getWallet().getBalance() + amount);
+//			                System.out.println("Amount Sent to "+ Destuid +" Successfully");
+//			                System.out.println(user.getWallet().getBalance());
+//			                break;
+//			            } else {
+//			                System.out.println("User Id Entered is Not Found");
+//			            }
+//			        }
+						
+			}else if(txn.getTxnsrc()==Transactiontype.BANK){
+				
+				
+//		        System.out.println("Enter the Source Amount : ");
+//		        txn.setTxnamount(ty.nextDouble());
+//		        double amount = txn.getTxnamount();
+//		        System.out.println("Enter the Bank Account Number : ");
+//		        long DestAcctNo = ty.nextLong();
+//		        for(Bankaccount ba : Bank) {
+//		            if(ba.getBankacctnumber() == DestAcctNo) {
+//		            	
+//		            	
+//		            	
+//		            	
+//		                w.setBalance(amount + w.getBalance());
+//		                System.out.println("Amount Sent to this Account Number "+ DestAcctNo +" Successfully");
+//		            } else {
+//		                System.out.println("Account Number Entered is Not Found");
+//		            }
+		        }else if (txn.getTxnsrc()==Transactiontype.WALLET)  {
+					Wallet Source = Walletlist.get(Runpaymentapp.CurrUserId);
+					 txn.setSourceWallet(Source);
+					 System.out.println("Enter The Reciver UserId To Send : ");
+					 int Reciever = ty.nextInt();
+					 Wallet Destination = Walletlist.get(Reciever);
+					 txn.setDestinationWallet(Destination);
+					 System.out.println("Enter The Amount To Send :");
+					 double Txamount = ty.nextDouble() ;
+					 txn.setTransactionDate(date);
+					 txn.setTxnId(date.toString());
+					boolean res = ops.Transaction(Source,Destination,txn.getTransactiontype(),Txamount);
+					if(res== true) {
+					System.out.println("Transaction completed");
+					System.out.println("Your Current Balance : "+ Wallet.getBalance());
+					}else
+					{
+						System.out.println("Transaction Failed");
+					}
+//								if(w.getBalance()>= txnamount) {
+//							
+//							for(User user : users) {
+//								if(user.getUserId() == Destuid1) {
+//									
+//									
+//									
+//									w.setBalance(amount+ w.getBalance());
+//									System.out.println("Amount Sent to "+ Destuid1 +" Successfull");
+//								}
+//							}
+//						}else {
+//							System.out.println("User Id Entered is Not Found");
+//						}
+					}
+
+			}
+		
 		}
 }
