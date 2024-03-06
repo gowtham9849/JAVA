@@ -1,10 +1,8 @@
 
 
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 
 public class Useroperations {
@@ -91,21 +89,25 @@ public class Useroperations {
 	public void addMoneytoWallet(double amount) {
 		if(Walletlist.containsKey(Runpaymentapp.CurrUserId)) {
 			
-			Walletlist.get(Runpaymentapp.CurrUserId).setBalance(Walletlist.get(Runpaymentapp.CurrUserId).getBalance()+amount);
+			Walletlist.get(Runpaymentapp.CurrUserId);
+			Walletlist.get(Runpaymentapp.CurrUserId);
+			Wallet.setBalance(Wallet.getBalance()+amount);
 			
-			System.out.println("Your Current Balance in your wallet : "+Walletlist.get(Runpaymentapp.CurrUserId).getBalance());
+			Walletlist.get(Runpaymentapp.CurrUserId);
+			System.out.println("Your Current Balance in your wallet : "+Wallet.getBalance());
 			
 		}
 	}
 	
 	public double checkWalletBalance(){
 		System.out.println("Your Current Balance in Your Wallet : ");
-		return Walletlist.get(Runpaymentapp.CurrUserId ).getBalance();
+		Walletlist.get(Runpaymentapp.CurrUserId );
+		return Wallet.getBalance();
 	}
 	public boolean Transaction(Wallet Sender, Wallet receiver, Txn tType, double amount) {
-		if(Sender.getBalance()>amount) {
-			receiver.setBalance(receiver.getBalance()+ amount);
-			Sender.setBalance(Sender.getBalance()-amount);
+		if(Wallet.getBalance()>amount) {
+			Wallet.setBalance(Wallet.getBalance()+ amount);
+			Wallet.setBalance(Wallet.getBalance()-amount);
 			return true;	
 		}
 		return false;

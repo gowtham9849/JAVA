@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +9,7 @@ import java.util.Scanner;
 
 
 public class Runpaymentapp {
+	private static final Bankaccount[] Bank = null;
 	static int x = 0;
 	public static List<User> userlist = new ArrayList<User>();
 	public static List<Bankaccount> Bankacctlist = new ArrayList<Bankaccount>();
@@ -18,152 +20,151 @@ public class Runpaymentapp {
 	
 	
 	public static void main(String[] args) {
-//		Fileops fileOps = new Fileops();
-//		 try {
-//			List<User> userData = fileOps.fileToUser();
-//			for(User u : userData) {
-//				System.out.println(u.getUserId()+" "+u.getFirstName()+" "+u.getLastName()+" "+u.getPhoneNo()+" "+u.getDateOfBirth()+" "+u.getAddress());
-//			}
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//	}
-		int SelectedOption = 0;
-		Scanner opt = new Scanner(System.in); 
-		
-		while(true) {
-			System.out.println("please select one Option");
-			System.out.println("1.Register New User");
-			System.out.println("2.Login");
-			System.out.println("3.Add Bank Account");
-			System.out.println("4.List Of Users");
-			System.out.println("5.Current User");
-			System.out.println("6. List of All User Bank Account");
-			System.out.println("7.Add Money To Wallet(self)");
-			System.out.println("8.Check Balance in Wallet");
-			System.out.println("9.Send Money To Other User(DEPOSIT)");
-			System.out.println("10.User Can Withdraw The Money(WITHDRAW)");
-			System.out.println("11.Mini Statement of transaction");
-			System.out.println("12.Delete Bank Account");
-			System.out.println("13.To Log Out The User");
-			System.out.println("-1.Quit / Exit From Command");
-			System.out.println("Choose an Option: ");
-			
-			String Optstr = opt.next();	
-			
-		try {
-			
-			SelectedOption = Integer.parseInt(Optstr);
-		
-			}catch(NumberFormatException e){
-				e.printStackTrace();
-				e.getMessage();	
-				System.out.println("Number Format Error. Please Choose Another Option.");
-			}catch(ArithmeticException e){
-				e.printStackTrace();
-				e.getMessage();
-				System.out.println("Arthemetic Error. Please Choose Another Option.");
-			}catch(Exception e){
-				e.printStackTrace();
-				e.getMessage();
-				System.out.println("Some Errors has Occured. Please Choose Another Option.");
-			}finally {
-				System.out.println();
+		Fileops fileOps = new Fileops();
+		 try {
+			List<User> userData = fileOps.fileToUser();
+			for(User u : userData) {
+				System.out.println(u.getUserId()+" "+u.getFirstName()+" "+u.getLastName()+" "+u.getPhoneNo()+" "+u.getDateOfBirth()+" "+u.getAddress());
 			}
-		
-			System.out.println("User selected " + Optstr);
-			
-			Useroperations ops = new Useroperations();
-			
-		if(Optstr.equalsIgnoreCase("1")){
-			
-			registerUser();
-			
-		}
-		else if(Optstr.equalsIgnoreCase("2")) {
-			
-			
-			if(CurrUserId != -1) {
-			
-				System.out.println("please log out the current User ");
-			
-			}else {
-				loginUser();
-			}
-			
-			
-		}
-		else if(Optstr.equalsIgnoreCase("3")) {
-			
-			if(ValidateCurrUser()) {
+		} catch (IOException e) {
+			e.printStackTrace();
+	}
+		try (Scanner opt = new Scanner(System.in)) {
+			while(true) {
+				System.out.println("please select one Option");
+				System.out.println("1.Register New User");
+				System.out.println("2.Login");
+				System.out.println("3.Add Bank Account");
+				System.out.println("4.List Of Users");
+				System.out.println("5.Current User");
+				System.out.println("6. List of All User Bank Account");
+				System.out.println("7.Add Money To Wallet(self)");
+				System.out.println("8.Check Balance in Wallet");
+				System.out.println("9.Send Money To Other User(DEPOSIT)");
+				System.out.println("10.User Can Withdraw The Money(WITHDRAW)");
+				System.out.println("11.Mini Statement of transaction");
+				System.out.println("12.Delete Bank Account");
+				System.out.println("13.To Log Out The User");
+				System.out.println("-1.Quit / Exit From Command");
+				System.out.println("Choose an Option: ");
 				
-			addBankAccount();
+				String Optstr = opt.next();	
+				
+			try {
+				
+				Integer.parseInt(Optstr);
 			
+				}catch(NumberFormatException e){
+					e.printStackTrace();
+					e.getMessage();	
+					System.out.println("Number Format Error. Please Choose Another Option.");
+				}catch(ArithmeticException e){
+					e.printStackTrace();
+					e.getMessage();
+					System.out.println("Arthemetic Error. Please Choose Another Option.");
+				}catch(Exception e){
+					e.printStackTrace();
+					e.getMessage();
+					System.out.println("Some Errors has Occured. Please Choose Another Option.");
+				}finally {
+					System.out.println();
+				}
+			
+				System.out.println("User selected " + Optstr);
+				
+				Useroperations ops = new Useroperations();
+				
+			if(Optstr.equalsIgnoreCase("1")){
+				
+				registerUser();
+				
 			}
-		}else if(Optstr.equalsIgnoreCase("4")) {
-			
-			ops.printUserlist(userlist);
-			
-			
-		}else if(Optstr.equalsIgnoreCase("5")){
-			
-			if(CurrUserId != -1) {
-			ops.Printcurruserdetails(CurrUserId);
-			}else{
-				System.out.println("No User Has Logged In");
+			else if(Optstr.equalsIgnoreCase("2")) {
+				
+				
+				if(CurrUserId != -1) {
+				
+					System.out.println("please log out the current User ");
+				
+				}else {
+					loginUser();
+				}
+				
+				
 			}
-			
-		}else if(Optstr.equalsIgnoreCase("6")){
+			else if(Optstr.equalsIgnoreCase("3")) {
+				
+				if(ValidateCurrUser()) {
+					
+				addBankAccount();
+				
+				}
+			}else if(Optstr.equalsIgnoreCase("4")) {
+				
+				ops.printUserlist(userlist);
+				
+				
+			}else if(Optstr.equalsIgnoreCase("5")){
+				
+				if(CurrUserId != -1) {
+				ops.Printcurruserdetails(CurrUserId);
+				}else{
+					System.out.println("No User Has Logged In");
+				}
+				
+			}else if(Optstr.equalsIgnoreCase("6")){
 
-			if(CurrUserId != -1) {
-				PrintCurrUserBankaccountList();
-			}else {
-				System.out.println("Please Login to show bank accounts");
-			}
-			
-			
-		}else if(Optstr.equalsIgnoreCase("7")) {
-			if(CurrUserId != -1) {
+				if(CurrUserId != -1) {
+					PrintCurrUserBankaccountList();
+				}else {
+					System.out.println("Please Login to show bank accounts");
+				}
 				
-				addWallet();
 				
-			}else {
-			System.out.println("User Must Log In to Add Money to wallet");
-			}
-		}else if(Optstr.equalsIgnoreCase("8")) {
-			if(CurrUserId != -1) {
-				System.out.println(ops.checkWalletBalance());
-			}else {
-				System.out.println("Please Log in to Check Balance In Wallet");
-			}
-		}else if(Optstr.equalsIgnoreCase("9")) {
-			if(CurrUserId != -1) {
-				Dotransaction();
-			}
-		}else if(Optstr.equalsIgnoreCase("10")) {
-			if(CurrUserId != -1) {
+			}else if(Optstr.equalsIgnoreCase("7")) {
+				if(CurrUserId != -1) {
+					
+					addWallet();
+					
+				}else {
+				System.out.println("User Must Log In to Add Money to wallet");
+				}
+			}else if(Optstr.equalsIgnoreCase("8")) {
+				if(CurrUserId != -1) {
+					System.out.println(ops.checkWalletBalance());
+				}else {
+					System.out.println("Please Log in to Check Balance In Wallet");
+				}
+			}else if(Optstr.equalsIgnoreCase("9")) {
+				if(CurrUserId != -1) {
+					Dotransaction();
+				}
+			}else if(Optstr.equalsIgnoreCase("10")) {
+				if(CurrUserId != -1) {
+					
+				}
+			}else if(Optstr.equalsIgnoreCase("11")) {
+				if(CurrUserId != -1) {
+					
+				}
+			}else if(Optstr.equalsIgnoreCase("12")) {
+				if(CurrUserId != -1) {
+					 Scanner ot = new Scanner(System.in);
+					  Bankaccount ba = new Bankaccount();
+					    System.out.println("Enter Bank Account Number: ");
+					    long accnum = opt.nextLong();
+					DelBankAcc(CurrUserId,accnum, userlist);
+				}else {
+					System.out.println("please login to delete the bankaccount");
+				}
+			}else if(Optstr.equalsIgnoreCase("13")) {
+				if(CurrUserId != -1) {
+					logout();
+			}else if(Optstr.equalsIgnoreCase("-1")) {
+				System.out.println("You Have Exit");
+				break;
 				
-			}
-		}else if(Optstr.equalsIgnoreCase("11")) {
-			if(CurrUserId != -1) {
-				
-			}
-		}else if(Optstr.equalsIgnoreCase("12")) {
-			if(CurrUserId != -1) {
-				 Scanner ot = new Scanner(System.in);
-				  Bankaccount ba = new Bankaccount();
-				    System.out.println("Enter Bank Account Number: ");
-				    long accnum = opt.nextLong();
-				DelBankAcc(CurrUserId,accnum, userlist);
-			}else {
-				System.out.println("please login to delete the bankaccount");
-			}
-		}else if(Optstr.equalsIgnoreCase("13")) {
-			if(CurrUserId != -1) {
-				logout();
-		}else if(Optstr.equalsIgnoreCase("-1")) {
-			System.out.println("You Have Exit");
-			break;
-			
+					}
 				}
 			}
 		}
@@ -392,22 +393,23 @@ public class Runpaymentapp {
 			}else if(txn.getTxnsrc()==Transactiontype.BANK){
 				
 				
-//		        System.out.println("Enter the Source Amount : ");
-//		        txn.setTxnamount(ty.nextDouble());
-//		        double amount = txn.getTxnamount();
-//		        System.out.println("Enter the Bank Account Number : ");
-//		        long DestAcctNo = ty.nextLong();
-//		        for(Bankaccount ba : Bank) {
-//		            if(ba.getBankacctnumber() == DestAcctNo) {
-//		            	
-//		            	
-//		            	
-//		            	
-//		                w.setBalance(amount + w.getBalance());
-//		                System.out.println("Amount Sent to this Account Number "+ DestAcctNo +" Successfully");
-//		            } else {
-//		                System.out.println("Account Number Entered is Not Found");
-//		            }
+		        System.out.println("Enter the Source Amount : ");
+		        txn.setTxnamount(ty.nextDouble());
+		        double amount = txn.getTxnamount();
+		        System.out.println("Enter the Bank Account Number : ");
+		        long DestAcctNo = ty.nextLong();
+		        for(Bankaccount ba : Bank) {
+		            if(ba.getBankacctnumber() == DestAcctNo) {
+		            	
+		            	
+		            	
+		            	
+		                Wallet.setBalance(amount + Wallet.getBalance());
+		                System.out.println("Amount Sent to this Account Number "+ DestAcctNo +" Successfully");
+		            } else {
+		                System.out.println("Account Number Entered is Not Found");
+		            }
+		        }
 		        }else if (txn.getTxnsrc()==Transactiontype.WALLET)  {
 					Wallet Source = Walletlist.get(Runpaymentapp.CurrUserId);
 					 txn.setSourceWallet(Source);
@@ -445,5 +447,7 @@ public class Runpaymentapp {
 
 			}
 		
+		
 		}
 }
+
