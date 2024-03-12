@@ -6,7 +6,7 @@
 
 <div align="center">
   <img src="https://github-readme-streak-stats.herokuapp.com/?user=gowtham9849&theme=dark&hide_border=false" height="155" alt="stats graph"  />
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Vijaybabu26&theme=dark&hide_border=true" height="155" alt="languages graph"  />
+  <img src="https://github-readme-stats.vercel.app/api?username=gowtham9849&theme=dark&hide_border=false&include_all_commits=false&count_private=false" height="155" alt="languages graph"  />
 </div>
 
 ###
