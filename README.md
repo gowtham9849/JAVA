@@ -1,6 +1,6 @@
-### Hi there 👋
 
-<!--<h2 align="left">Hi 👋! My name is nalla gowtham  and I'm a B.Sc (Computer Science) Graduate >, from vizag </h2>
+
+<h2 align="left">Hi 👋! My name is nalla gowtham  and I'm a B.Sc (Computer Science) Graduate >, from vizag </h2>
 
 ###
 
