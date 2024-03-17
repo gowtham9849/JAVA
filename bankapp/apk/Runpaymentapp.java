@@ -158,7 +158,7 @@ public class Runpaymentapp {
 			}
 			else if (Optstr.equalsIgnoreCase("11")) {
 			    if (CurrUserId != -1) {
-			        PrintTransactionOfUser();
+//			        PrintTransactionOfUser();
 			    } else {
 			        System.out.println("Please Login to view transaction history.");
 			    }
@@ -614,21 +614,21 @@ public class Runpaymentapp {
 			}
 		
 		}
-		private static void PrintTransactionOfUser() {
-		    System.out.println("Mini Statement of Transactions:");
-
-		    // Iterate over the list of transactions
-		    for (Transaction txn : TxnList) {
-		        // Check if the transaction belongs to the current user
-		        if (txn.getUserId() == CurrUserId) {
-		            // Print transaction details
-		            System.out.println("Transaction ID: " + txn.getTxnId());
-		            System.out.println("Transaction Date: " + txn.getTransactionDate());
-		            System.out.println("Transaction Type: " + txn.getTransactiontype());
-		            System.out.println("Amount: " + txn.getAmount());
-		            System.out.println("----------------------------------");
-		        }
-		    }
-		}
+//		private static void PrintTransactionOfUser() {
+//		    System.out.println("Mini Statement of Transactions:");
+//
+//		  
+//		    for (Transaction txn : TxnList) {
+//		     
+//		        if (txn.getUserId() == CurrUserId) {
+//		           
+//		            System.out.println("Transaction ID: " + txn.getTxnId());
+//		            System.out.println("Transaction Date: " + txn.getTransactionDate());
+//		            System.out.println("Transaction Type: " + txn.getTransactiontype());
+//		            System.out.println("Amount: " + txn.getAmount());
+//		            System.out.println("----------------------------------");
+//		        }
+//		    }
+//		}
 
 }
