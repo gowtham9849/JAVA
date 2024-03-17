@@ -18,7 +18,7 @@ public class Useroperations {
 	List<User>users = Runpaymentapp.userlist;
 	List<Bankaccount> Bank = Runpaymentapp.Bankacctlist;
 	Map<Integer , Wallet> Walletlist = Runpaymentapp.Walletlist; 
-	Map<Integer , Transaction > Txnlist = Runpaymentapp.Txnlist;
+	List<Transaction> Txnlist = Runpaymentapp.TxnList;
 	
 //	List<User> users = null;
 //	List<Bankaccount> Bankacctlist = null;
@@ -53,12 +53,7 @@ public class Useroperations {
 				System.out.println("User Details of "+ u.getFirstName());
 				System.out.println(u);
 			}
-		}
-			
-		
-		
-	
-		
+		}	
 	}
 	
 	public boolean verifyuserid(String userId,String password) {
@@ -84,11 +79,15 @@ public class Useroperations {
 		
 		
 	}
-//	public void minitransaction(int UserId) {
-//		for(User u : users) {
-//			if(u)
-//		}
-//	}
+	public Map<User,List<Transaction>> PrintTxnHistory() {
+		Map<User,List<Transaction>> usertxn = new HashMap<User,List<Transaction>>();
+		for(User u :users) {
+			if(users != null) {
+				usertxn.put(u,u.getTxnlist());
+			}
+		}
+		return usertxn;
+	}
 	public Map<User,List<Bankaccount>> getUserBankAccount(){
 		Map<User, List<Bankaccount>> userBankAcctMap = new HashMap<User, List<Bankaccount>>() ;
 		
@@ -137,14 +136,7 @@ public class Useroperations {
 	
 		
 	}
-	public boolean WTransaction(Wallet Sender, Wallet Receiver, Txn tType, double amount) {
-		if(Sender.getBalance()>amount) {
-			Receiver.setBalance(Receiver.getBalance()+ amount);
-			Sender.setBalance(Sender.getBalance()-amount);
-			return true;	
-		}
-		return false;
-	}
+	
 	public boolean CTransaction(Wallet Reciever, Txn tType, double amount) {
 		if(amount >= 0) {
 			Reciever.setBalance(Reciever.getBalance()+ amount);
@@ -152,15 +144,41 @@ public class Useroperations {
 		}
 		return false;
 	}
-	public boolean BTransaction(Bankaccount Sender, Bankaccount Reciever, Txn tType, double amount) {
+	public boolean BBTransaction(Bankaccount Sender, Bankaccount RecieverB, Txn tType, double amount) {
 		if(Sender.getBankBal()>amount) {
-			Reciever.setBankBal(Reciever.getBankBal()+amount);
+			RecieverB.setBankBal(RecieverB.getBankBal()+amount);
 			Sender.setBankBal(Sender.getBankBal()-amount);
 			return true;
 		}
 		return false;
 		
 	}
+	public boolean BWTransaction(Bankaccount Sender, Wallet recieverw, Txn tType, double txamount) {
+		if(Sender.getBankBal()>txamount) {
+			recieverw.setBalance(recieverw.getBalance()+txamount);
+			Sender.setBankBal(Sender.getBankBal()-txamount);
+			return true;
+		}
+		return false;
+		
+	}
+	public boolean WwTransaction(Wallet Sender, Wallet Receiver, Txn tType, double amount) {
+		if(Sender.getBalance()>amount) {
+			Receiver.setBalance(Receiver.getBalance()+ amount);
+			Sender.setBalance(Sender.getBalance()-amount);
+			return true;	
+		}
+		return false;
+	}
+	public boolean WbTransaction(Wallet Sender, Bankaccount Recieverb, Txn tType, double txamount) {
+		if(Sender.getBalance()>txamount) {
+			Recieverb.setBankBal(Recieverb.getBankBal()+txamount);
+			Sender.setBalance(Sender.getBalance()-txamount);
+			return true;	
+		}
+		return false;
+	}
+	
 	
 }
 

@@ -13,6 +13,15 @@ public class User {
 	private int userId;
 	private String passWord;
 	private Wallet wallet;
+	private List<Transaction> Txnlist = new ArrayList<Transaction>();
+	public List<Transaction> getTxnlist() {
+		return Txnlist;
+	}
+
+	public void setTxnlist(List<Transaction> txnlist) {
+		Txnlist = txnlist;
+	}
+	private List<Bankaccount> Bankacctlist = new ArrayList<Bankaccount>();
 	public Wallet getWallet() {
 		return wallet;
 	}
@@ -20,17 +29,11 @@ public class User {
 	public void setWallet(Wallet wallet) {
 		this.wallet = wallet;
 	}
-	private List<Bankaccount> Bankacctlist = new ArrayList<Bankaccount>();
-	
-	private Map<Integer , Transaction> Txnlist = new HashMap<Integer, Transaction>();
-	
-	public Map<Integer, Transaction> getTxnlist() {
-		return Txnlist;
-	}
 
-	public void setTxnlist(Map<Integer, Transaction> txnlist) {
-		Txnlist = txnlist;
-	}
+	
+
+	
+	
 
 	public List<Bankaccount> getBankacctlist() {
 		return Bankacctlist;
