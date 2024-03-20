@@ -156,14 +156,17 @@ public class Runpaymentappjdbc {
 			System.out.println("Enter Password :");
 			String PassWord = opt.next();
 			PaymentCliDao db = new PaymentCliDao();
-			if(PaymentCliDao.Logindb(UId, PassWord)) {
-				CurrUserId = UId;
-				db.Logindb(UId, PassWord);
-				System.out.println("Login Success");
+			
+				boolean	LoginUser = PaymentCliDao.Logindb(UId, PassWord);
+				if(LoginUser) {
+					Runpaymentappjdbc.CurrUserId = UId;
+					System.out.println("Login successful!");
+				}else{
+					System.out.println("Login Failed");
+				}
+			
 				
-			}else {
-				
-			}
+			
 			
 		}
 		public static void AddBankAcc() {
@@ -184,7 +187,7 @@ public class Runpaymentappjdbc {
 			 AcctType Accty = null;
 		        while (Accty == null) {
 			try {
-				System.out.println("Enter a number from 0 to 4:");
+				System.out.println("Enter a number from 0 to 3:");
 		       int Acct_TypeId = opt.nextInt();
 
 		        if (Acct_TypeId < 0 || Acct_TypeId > 3) {
