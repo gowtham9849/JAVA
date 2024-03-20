@@ -162,7 +162,7 @@ public class Runpaymentappjdbc {
 				System.out.println("Login Success");
 				
 			}else {
-				System.out.println("Login Failed");
+				
 			}
 			
 		}
@@ -184,7 +184,7 @@ public class Runpaymentappjdbc {
 			 AcctType Accty = null;
 		        while (Accty == null) {
 			try {
-				System.out.println("Enter a number from 0 to 3:");
+				System.out.println("Enter a number from 0 to 4:");
 		       int Acct_TypeId = opt.nextInt();
 
 		        if (Acct_TypeId < 0 || Acct_TypeId > 3) {

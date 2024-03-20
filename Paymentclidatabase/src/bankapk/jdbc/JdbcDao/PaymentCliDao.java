@@ -19,7 +19,7 @@ public class PaymentCliDao {
 	public static void UserRdb(User u) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection Con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Paymentapp", "root", "uday7650");
+			Connection Con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Paymentapp", "root", "root");
 			Statement Stm = Con.createStatement();
 			String Uquery = "insert into User_Info(First_Name,Last_Name,Phone_No,Date_Of_Birth,Address,PassWord,Curr_Wallet_Balance)" + "values "
 					+ "('"+u.getFirstName()+"','"+u.getLastName()+"','"+u.getPhoneNo()+"','"+u.getDateOfBirth()+"','"+u.getAddress()+"','"+u.getPassWord()+"','"+0+"')";
@@ -30,15 +30,12 @@ public class PaymentCliDao {
 			e.printStackTrace();
 		}	
 	}
-	
-	
-	
 	public static boolean Logindb(int Uid ,String PassWord) {
 		User u = new User();
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection Con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Paymentappcli", "root", "udayy7650");
+			Connection Con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Paymentapp", "root", "root");
 			Statement Stm = Con.createStatement();
 
 			String Uquery = "Select User_Id,PassWord from User_Info where User_Id = '"+u.getUserId()+"'and PassWord ='"+u.getPassWord()+"'";
@@ -58,13 +55,11 @@ public class PaymentCliDao {
 		return false;
 	}
 
-	
-	
-	
+
 	public static void UserBankDb(User u, BankAccount ba) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection Con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Paymentapp", "root", "uday7650");
+			Connection Con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Paymentapp", "root", "root");
 			Statement Stm = Con.createStatement();
 			String BankQuery = "insert into Bank_Account_Details (Bank_AcctNo,Bank_AcctBankName,Acct_TypeId,Bank_IFSC_Code,Bank_AcctPin,User_Id,Curr_Bank_Balance)+"
 					+ "values"+"('"+ba.getAccNo()+"','"+ba.getAcctBankName()+"','"+ba.getBankAcctType()+"','"+ba.getAcctIFSCCode()+"','"+ba.getAcctPin()+"','"+u.getUserId()+"','"+0+"')";
@@ -79,7 +74,7 @@ public class PaymentCliDao {
 	public static void PrintUserListDb() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection Con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Paymentapp", "root", "uday7650");
+			Connection Con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Paymentapp", "root", "root");
 			Statement Stm = Con.createStatement();
 			String UserList = "Select * from User_Info";
 			ResultSet res = Stm.executeQuery(UserList);
@@ -96,7 +91,7 @@ public class PaymentCliDao {
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection Con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Paymentapp", "root", "uday7650");
+			Connection Con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Paymentapp", "root", "root");
 			Statement Stm = Con.createStatement();
 			String CurrLoginUser = "Select * from User_Info where User_Id = '"+Runpaymentappjdbc.CurrUserId+"'";
 			ResultSet res = Stm.executeQuery(CurrLoginUser);
@@ -113,7 +108,7 @@ public class PaymentCliDao {
 		BankAccount ba = new BankAccount();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection Con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Paymentapp", "root", "uday7650");
+			Connection Con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Paymentapp", "root", "root");
 			Statement Stm = Con.createStatement();
 			String BankUserList = "Select * from Bank_Account_Details where User_Id = '"+ba.getUserId()+"'";
 			ResultSet res = Stm.executeQuery(BankUserList);
@@ -131,7 +126,7 @@ public class PaymentCliDao {
 		User u = new User();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection Con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Paymentapp", "root", "uday7650");
+			Connection Con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Paymentapp", "root", "root");
 			Statement Stm = Con.createStatement();
 			String Waquery = "Update User_Info Set Curr_Wallet_Balance = Curr_Wallet_Balance + '"+wa.getCurrWalletBalance()+"' where User_Id = '"+u.getUserId()+"'";
 			Stm.executeUpdate(Waquery);
@@ -145,7 +140,7 @@ public class PaymentCliDao {
 		User u = new User();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection Con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Paymentapp", "root", "uday7650");
+			Connection Con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Paymentapp", "root", "root");
 			Statement Stm = Con.createStatement();
 			String Waquery = "Select Curr_Wallet_Balance from User_Info where User_Id = '"+u.getUserId()+"'";
 			Stm.executeUpdate(Waquery);
@@ -159,4 +154,3 @@ public class PaymentCliDao {
 }
 	
 	
-
