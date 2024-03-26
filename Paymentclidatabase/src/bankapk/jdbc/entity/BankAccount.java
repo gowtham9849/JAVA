@@ -23,8 +23,8 @@ public class BankAccount {
 	public AcctType getBankAcctType() {
 		return BankAcctTypeId;
 	}
-	public void setBankAcctType(AcctType accty) {
-		BankAcctTypeId = accty;
+	public void setBankAcctType(AcctType acct) {
+		BankAcctTypeId = acct;
 	}
 	public String getAcctIFSCCode() {
 		return AcctIFSCCode;
