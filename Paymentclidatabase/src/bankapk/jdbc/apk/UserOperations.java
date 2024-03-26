@@ -26,11 +26,11 @@ public class UserOperations {
 			return false;
 		}
 	}
-	public BankAccount AddBankAcct(long AccNo,String AcctBankName, AcctType accty,String AcctIFSCCode,int acctPin) {
+	public BankAccount AddBankAcct(long AccNo,String AcctBankName,String AcctIFSCCode,int acctPin) {
 		BankAccount ba = new BankAccount();
 		ba.setAccNo(AccNo);
 		ba.setAcctBankName(AcctBankName);
-		ba.setBankAcctType(accty);
+		
 		ba.setAcctIFSCCode(AcctIFSCCode);
 		ba.setAcctPin(acctPin);
 		return ba;
