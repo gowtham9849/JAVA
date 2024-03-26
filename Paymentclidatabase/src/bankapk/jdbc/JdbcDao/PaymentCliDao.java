@@ -70,16 +70,6 @@ public class PaymentCliDao {
 					+ ba.getAccNo() + "','" + ba.getAcctBankName() + "','" + ba.getBankAcctType() + "','" + ba.getAcctIFSCCode() + "','" +Runpaymentappjdbc.CurrUserId +"', '" + ba.getAcctPin() + "','" + 0 + "')";
 
 					Stm.executeUpdate(BankQuery);
-//			String BankQuery = "insert into Bank_Account_Details (Bank_AcctNo,Bank_AcctBankName,Acct_TypeId,Bank_IFSC_Code,User_Id,Bank_AcctPin,Curr_Bank_Balance) values (?, ?, ?, ?, ?, ?, ?)";
-//			PreparedStatement pstmt = Con.prepareStatement(BankQuery);
-//			pstmt.setLong(1, ba.getAccNo());
-//			pstmt.setString(2, ba.getAcctBankName());
-//			pstmt.setInt(3, ba.getBankAcctType());
-//			pstmt.setString(4, ba.getAcctIFSCCode());
-//			pstmt.setInt(5, ba.getUserId());
-//			pstmt.setInt(6, ba.getAcctPin());
-//			pstmt.setInt(7, 0);
-//			pstmt.executeUpdate();
 
 			Stm.close();
 		}catch (ClassNotFoundException | SQLException e) {
@@ -158,21 +148,6 @@ public class PaymentCliDao {
 			
 			}
 			
-//			String Waquery = "UPDATE User_Info SET Curr_Wallet_Balance = Curr_Wallet_Balance + ? WHERE User_Id = ?";
-//			try {
-//			    PreparedStatement pstmt = Con.prepareStatement(Waquery);
-//			    pstmt.setDouble(1, Wamount); // Assuming wamount is a double/float
-//			    pstmt.setInt(2, Runpaymentappjdbc.CurrUserId); // Assuming getUserId returns an integer
-//			    int updatedRows = pstmt.executeUpdate();
-//			    if (updatedRows > 0) {
-//			        System.out.println("Wallet updated successfully");
-//			    } else {
-//			        System.out.println("No user found with the provided user ID");
-//			    }
-//			    pstmt.close();
-//			} catch (SQLException e) {
-//			    e.printStackTrace();
-//			}
 
 			
 		} catch (ClassNotFoundException | SQLException e) {
@@ -315,9 +290,7 @@ public class PaymentCliDao {
 			
 			String Rquery = "Update User_Info Set Curr_Wallet_Balance = Curr_Wallet_Balance + '"+TxnAmount+"' where User_Id = '"+Reciever+"'";
 			
-//			String Tquery = "insert into Transaction (Txn_Id,Txn_Date,Txn_Amount,Txn_Type,Txn_AcctType,Txn_User_Id) values "+ 
-//							"('"+TxnIdS+"','"+now+"','"+TxnAmount+"','"+SenderType+"','"+Txn_AcctType+"','"+Sender+"')";
-//			
+			
 			String Tquery = "INSERT INTO Transaction (Txn_Id, Txn_Date, Txn_Amount, Txn_Type, Txn_AcctType, Txn_User_Id) VALUES " + 
 			        "('" + TxnIdS + "', '" + now + "', " + TxnAmount + ", '" + SenderType + "', '" + Txn_AcctType + "', '" + Sender + "')";
 
@@ -331,7 +304,6 @@ public class PaymentCliDao {
 			
 			
 			
-//			String Bquery = "Select Curr_Wallet_Balance from User_Info where User_Id = '"+Runpaymentappjdbc.CurrUserId+"'";
 			Stm.executeUpdate(Squery);
 			Stm.executeUpdate(Rquery);
 			ResultSet res = Stm.executeQuery(Bquery);
