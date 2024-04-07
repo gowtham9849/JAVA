@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List Project</title>
+    <style>
+     
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 80%;
+            color: #3E3D38;
+            margin: 0 auto;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+      
+    </style>
+</head>
+<body>
+    <center>
+        <h1>To-Do List Project</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Information</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="dateDisplay"></td>
+                    <td id="taskDisplay"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <label for="Text">To Do List:</label>
+            <input id="Text" type="text" placeholder="Enter task">
+            <label for="Date">Choose Date:</label>
+            <input id="Date" type="date">
+            <button onclick="addTask()">Add Task</button>
+        </div>
+    </center>
+    <script>
+        function addTask() {
+            var task = document.getElementById("Text").value;
+            var date = document.getElementById("Date").value;
+            var newRow = document.createElement("tr");
+            var dateCell = document.createElement("td");
+            var taskCell = document.createElement("td");
+
+            dateCell.textContent = date;
+            taskCell.textContent = task;
+
+            newRow.appendChild(dateCell);
+            newRow.appendChild(taskCell);
+
+            document.querySelector("tbody").appendChild(newRow);
+            document.getElementById("Text").value = "";
+            document.getElementById("Date").value = "";
+            document.getElementById("dateDisplay").textContent = date;
+            document.getElementById("taskDisplay").textContent = task;
+        }
+    </script>
+</body>
+</html>
